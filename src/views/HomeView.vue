@@ -1,75 +1,49 @@
 <template>
   <div class="home">
+    <h2>{{ appTitle }}</h2>
+
+    <h3>{{ counterData.counterTitle }}:</h3>
+
     <div>
       <button @click="decreaseCounter" class="btn">-</button>
-      <span class="counter">{{ counter }}</span>
+      <span class="counter">{{ counterData.counter }}</span>
       <button @click="increaseCounter" class="btn">+</button>
     </div>
+
+    <div class="edit">
+      <h3>Edit counter title:</h3>
+      <input v-model="counterData.counterTitle" type="text">
+    </div>
+
+    <!-- can't edit because the variable is non-reactive variable -->
+    <div class="edit">
+      <h3>Edit App title:</h3>
+      <input v-model="appTitle" type="text">
+    </div>
   </div>
+
+    
 </template>
 
 <!-- Composition API | Script Setup Pattern -->
 <script setup>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 
-const counter = ref(0);
+const appTitle = 'My amazing App'
+
+const counterData = reactive({
+  counter: 0,
+  counterTitle : "My Counter"
+})
 
 const increaseCounter = () => {
-  counter.value++;
+  counterData.counter++;
 }
 
 const decreaseCounter = () => {
-  counter.value--;
+  counterData.counter--;
 }
 </script>
-
-<!-- Composition API | Setup Function Pattern -->
-<!-- <script>
-import { ref } from 'vue'
-
-export default {
-  setup(){
-
-    const counter = ref(0);
-
-    const increaseCounter = () => {
-      console.log(counter);
-      counter.value++;
-    }
-
-    const decreaseCounter = () => {
-      counter.value--;
-    }
-
-    return {
-      counter,
-      increaseCounter,
-      decreaseCounter
-    }
-  }
-}
-</script> -->
-
-<!-- Options API -->
-<!--
-<script>
-export default {
-  data(){
-    return {
-      counter: 0,
-    }
-  },
-  methods: {
-    increaseCounter(){
-      this.counter++;
-    },
-    decreaseCounter(){
-      this.counter--;
-    }
-  }
-}
-</script>
--->
 
 <style>
 .home{
@@ -80,5 +54,9 @@ export default {
 .btn, .counter{
   font-size: 40px;
   margin: 10px;
+}
+
+.edit{
+  margin-top: 60px;
 }
 </style>
