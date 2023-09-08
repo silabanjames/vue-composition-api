@@ -5,7 +5,17 @@
   <RouterLink to="/about">About</RouterLink>
 </nav>
 
-  <RouterView />
+
+<RouterView />
+
+
+<!-- For Activated Hooks -->
+<!-- <router-view v-slot="{ Component }">
+  <keep-alive>
+    <component :is="Component" />
+  </keep-alive>
+</router-view> -->
+
 </template>
 
 <style scoped>

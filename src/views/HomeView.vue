@@ -29,39 +29,84 @@
 </template>
 
 <!-- Composition API | Script Setup Pattern -->
-<script setup>
-import { reactive, computed, watch } from 'vue'
+<script setup> 
+/*
+  imports
+*/
+  import { reactive, computed, watch, onMounted } from 'vue'
 
-const appTitle = 'My amazing App';
+/*
+  app title
+*/
+  const appTitle = 'My amazing App';
+  onMounted(()=>{
+    console.log('Do stuff related to App Title')
+  });
 
-const counterData = reactive({
-  counter: 0,
-  counterTitle : "My Counter"
-})
+/*
+  counter data
+*/
+  const counterData = reactive({
+    counter: 0,
+    counterTitle : "My Counter"
+  })
 
+  // show alert if counter reach 20
+  watch(() => counterData.counter, (newCount, oldCount) => {
+    if(newCount == 20) alert('Way to go! You made it to 20!!');
+  })
 
-// show alert if counter reach 20
-watch(() => counterData.counter, (newCount, oldCount) => {
-  if(newCount == 20) alert('Way to go! You made it to 20!!');
-})
+  // computed variable that show the counter odd or even
+  const oddOrEven = computed(() => {
+    if (counterData.counter%2 == 0) return 'even';
+    else return 'odd';
+  });
 
+  const increaseCounter = (amount, e) => {
+    counterData.counter += amount;
+  }
 
-// computed variable that show the counter odd or even
-const oddOrEven = computed(() => {
-  if (counterData.counter%2 == 0) return 'even';
-  else return 'odd';
-});
+  const decreaseCounter = amount => {
+    counterData.counter -= amount;
+  }
 
-const increaseCounter = (amount, e) => {
-  counterData.counter += amount;
-}
+  onMounted(()=>{
+    console.log('Do stuff related to counter data');
+  })
 
-const decreaseCounter = amount => {
-  counterData.counter -= amount;
-}
+// Mounted Hooks
+// onBeforeMount(()=>{
+//   console.log('onBeforeMount');
+// })
+// onMounted(()=>{
+//   console.log('onMounted');
+// })
+// onBeforeUnmount(()=>{
+//   console.log('onBeforeUnmount');
+// })
+// onUnmounted(()=>{
+//   console.log('onUnmounted');
+// })
+
+// Activated Hooks
+// onActivated(()=>{
+//   console.log('onActivated');
+// })
+// onDeactivated(()=>{
+//   console.log('onDeactivated');
+// })
+
+// Updated Hooks
+// onBeforeUpdate(()=>{
+//   console.log('onBeforeUpdate')
+// });
+// onUpdated(()=>{
+//   console.log('onUpdated')
+// });
+
 </script>
 
-<!-- COMPUTED PROPERTIES IN OPTIONS API -->
+<!-- OPTIONS API -->
 <!-- <script>
 export default {
   data(){
@@ -79,6 +124,12 @@ export default {
     count(newCount, oldCount){
       if (newCount == 20) alert('asdasd')
     }
+  },
+  mounted(){
+    console.log('mounted');
+  },
+  unmounted(){
+    console.log('unmounted');
   }
 }
 </script>  -->
