@@ -16,7 +16,7 @@
 
     <div class="edit">
       <h3>Edit counter title:</h3>
-      <input v-model="counterData.counterTitle" type="text">
+      <input v-model="counterData.counterTitle" type="text" v-autofocus>
     </div>
 
     <!-- can't edit because the variable is non-reactive variable -->
@@ -34,6 +34,7 @@
   imports
 */
   import { reactive, computed, watch, onMounted } from 'vue'
+  import { vAutofocus } from '@/directives/vAutofocus'
 
 /*
   app title
@@ -74,35 +75,14 @@
     console.log('Do stuff related to counter data');
   })
 
-// Mounted Hooks
-// onBeforeMount(()=>{
-//   console.log('onBeforeMount');
-// })
-// onMounted(()=>{
-//   console.log('onMounted');
-// })
-// onBeforeUnmount(()=>{
-//   console.log('onBeforeUnmount');
-// })
-// onUnmounted(()=>{
-//   console.log('onUnmounted');
-// })
-
-// Activated Hooks
-// onActivated(()=>{
-//   console.log('onActivated');
-// })
-// onDeactivated(()=>{
-//   console.log('onDeactivated');
-// })
-
-// Updated Hooks
-// onBeforeUpdate(()=>{
-//   console.log('onBeforeUpdate')
-// });
-// onUpdated(()=>{
-//   console.log('onUpdated')
-// });
+/*
+  directives
+*/
+  // const vAutofocus = {
+  //   mounted: (el)=>{
+  //     el.focus()
+  //   }
+  // }
 
 </script>
 
@@ -130,6 +110,13 @@ export default {
   },
   unmounted(){
     console.log('unmounted');
+  },
+  directives:{
+    autofocus: {
+      mounted(el){
+        el.focus();
+      }
+    }
   }
 }
 </script>  -->
