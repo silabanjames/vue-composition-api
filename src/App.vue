@@ -2,6 +2,7 @@
 <template>
 <nav>
   <RouterLink to="/">Home</RouterLink>
+  <RouterLink to="/modals">Modals</RouterLink>
   <RouterLink to="/post">Posts</RouterLink>
 </nav>
 
